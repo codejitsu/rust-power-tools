@@ -7,7 +7,9 @@ type TestResult = Result<(), Box<dyn std::error::Error>>;
 fn dies_no_args() -> TestResult {
     let mut cmd = Command::cargo_bin("echo-rs")?;
 
-    cmd.assert().failure().stderr(predicate::str::contains("Usage"));
+    cmd.assert()
+        .failure()
+        .stderr(predicate::str::contains("Usage"));
     Ok(())
 }
 
@@ -23,7 +25,10 @@ fn runs() -> TestResult {
 fn hello1() -> TestResult {
     let mut cmd = Command::cargo_bin("echo-rs")?;
 
-    cmd.arg("Hello there").assert().success().stdout("Hello there\n\n");
+    cmd.arg("Hello there")
+        .assert()
+        .success()
+        .stdout("Hello there\n\n");
     Ok(())
 }
 
@@ -31,7 +36,10 @@ fn hello1() -> TestResult {
 fn hello2() -> TestResult {
     let mut cmd = Command::cargo_bin("echo-rs")?;
 
-    cmd.args(vec!["Hello", "there"]).assert().success().stdout("Hello there\n\n");
+    cmd.args(vec!["Hello", "there"])
+        .assert()
+        .success()
+        .stdout("Hello there\n\n");
     Ok(())
 }
 
@@ -39,7 +47,10 @@ fn hello2() -> TestResult {
 fn hello3() -> TestResult {
     let mut cmd = Command::cargo_bin("echo-rs")?;
 
-    cmd.args(vec!["     Hello ", "   there", "-n"]).assert().success().stdout("Hello there\n");
+    cmd.args(vec!["     Hello ", "   there", "-n"])
+        .assert()
+        .success()
+        .stdout("Hello there\n");
     Ok(())
 }
 
@@ -47,6 +58,9 @@ fn hello3() -> TestResult {
 fn hello4() -> TestResult {
     let mut cmd = Command::cargo_bin("echo-rs")?;
 
-    cmd.args(vec!["-n", "Hello", "there"]).assert().success().stdout("Hello there\n");
+    cmd.args(vec!["-n", "Hello", "there"])
+        .assert()
+        .success()
+        .stdout("Hello there\n");
     Ok(())
 }
